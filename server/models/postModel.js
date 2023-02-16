@@ -16,6 +16,14 @@ const postSchema=new mongoose.Schema({
     body:{
         type:String,
         required:true
+    },
+    username:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true
     }
 })
 module.exports=mongoose.model("Post",postSchema);

@@ -7,7 +7,9 @@ exports.createPost=catchAsyncErrors(async(req,res,next)=>{
         heading:heading,
         body:body,
         category:category,
-        user:req.user._id
+        user:req.user._id,
+        username:req.user.username,
+        email:req.user.email
     });
     res.status(200).json({
             success:true,
