@@ -50,3 +50,17 @@ exports.logout=catchAsyncErrors(async(req,res,next)=>
         message:"LoggedOut"
     })
 })
+
+exports.getUser=catchAsyncErrors(async(req,res,next)=>
+{const user=await User.findById(req.user._id);
+    if(!user)
+    {
+        return next(new ErrorHandler("User Not Found",404))
+    }
+
+  
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
