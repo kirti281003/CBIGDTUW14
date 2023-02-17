@@ -1,5 +1,6 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const Post=require("../models/postModel");
+const ApiFeatures = require("../utils/apiFeatures");
 const ErrorHandler = require("../utils/errorHandler");
 exports.createPost=catchAsyncErrors(async(req,res,next)=>{
     const{heading,category,body}=req.body;
@@ -17,7 +18,8 @@ exports.createPost=catchAsyncErrors(async(req,res,next)=>{
     })
 })
 exports.getPosts=catchAsyncErrors(async(req,res,next)=>{
-    const posts=await Post.find();
+    const apiFeatures=new ApiFeatures(Post.find(),req.query).search();
+    const posts=await apiFeatures.query;
     if(!posts)
     {
         return next(new ErrorHandler("No Posts Found",404))
